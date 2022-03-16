@@ -1,40 +1,30 @@
-# Jo
 import gender_guesser.detector as gender
 import re
-
 
 def open_file(filename):
 	return open(filename, 'r').read().split('\n')
 
-
 def split_mail(email):
 	return email.split('@')
-
 
 def get_prefix(email):
 	return split_mail(email)[0]
 
-
 def get_domain(email):
 	return split_mail(email)[1]
 
-
 def remove_tld(domain):
 	return domain.split('.')[0]
-
 
 def get_sex(first):
 	d = gender.Detector()
 	return d.get_gender(u"{}".format(first))
 
-
 def capitalize_list(arr):
 	return list(map(str.capitalize, arr))
 
-
 def remove_numbers(arr):
 	return [''.join(x for x in i if x.isalpha()) for i in arr]
-
 
 def trans_utf8(names):
 	specials = {
@@ -53,18 +43,15 @@ def trans_utf8(names):
 
 	return names
 
-
 def get_firstname(names):
 	if len(names) >= 1:
 		return names[0]
 	return ''
 
-
 def get_lastname(names):
 	if len(names) >= 2:
 		return names[1]
 	return ''
-
 
 def generate_sentence(first):
 	sex = get_sex(first)
@@ -74,7 +61,6 @@ def generate_sentence(first):
 		return 'Sehr geehrte Frau '
 	else:
 		return 'Hallo '
-
 
 def get_names(string):
 	names = re.split('-|\.', string)
@@ -110,19 +96,16 @@ def get_names(string):
 		'sentence': sentence
 	}
 
-
-# Main
 if __name__ == '__main__':
 
-  examples = '\n'
-  examples += 'johannes.mueller@gmail.com\n'
+  examples += '\njohannes.mueller@gmail.com\n'
   examples += 'paypal@tim-zielzenzen.de\n'
   examples += 'maeyer.tim994@web.de\n'
   examples += 'ueberfigger.tim994@web.de\n'
   print('Beispiele: {}\n'.format(examples))
 
   while True:
-    email = input('Schreib deine E-Mail hier: '.format(examples))
+    email = input('E-Mail: '.format(examples))
     prefix = get_prefix(email)
     domain = get_domain(email)
     providers = open_file('email-providers.txt')
